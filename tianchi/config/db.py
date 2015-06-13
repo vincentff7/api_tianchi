@@ -12,7 +12,7 @@ MYSQL_USER = 'api'
 MYSQL_HOST = 'localhost'
 MYSQL_PASSWD = 'shushanbj'
 MYSQL_PORT = '3306'
-MYSQL_DBNAME = 'tainchi'
+MYSQL_DBNAME = 'tianchi'
 
 SQLALCHEMY_CONF_URL= 'mysql+mysqldb://%s:%s@%s:%s/%s?charset=utf8mb4' % (MYSQL_USER, MYSQL_PASSWD, MYSQL_HOST, MYSQL_PORT, MYSQL_DBNAME)
 

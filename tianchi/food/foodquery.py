@@ -55,4 +55,10 @@ def get_common_foods_by_food_ids(food_ids):
     DBSession.close()
     return res
 
-
+if __name__ =='__main__':
+    food_ids = [1,2,3]
+    foods = get_common_foods_by_food_ids(food_ids)
+    if foods:
+        print len(foods)
+    else:
+        print 'No food'

@@ -1,9 +1,10 @@
 #-*-coding=utf-8-*-
 
+import re
 from sqlalchemy import(
     Column,
     INTEGER,
-    VARCHER,
+    VARCHAR,
     BIGINT,
     )
 from sqlalchemy.dialects.mysql import TINYINT
@@ -13,16 +14,16 @@ from tianchi.config.db import (
     )
 from tianchi.base.base_component import BaseComponent
 
-PREFIX = /home/quwm/workspace/api_tianchi/tianchi/statics/images/
+PREFIX = r'/home/quwm/workspace/api_tianchi/tianchi/statics/images/'
 
 class Image(Base,BaseComponent):
     __tablename__ = 'tc_image'
     image_id = Column(INTEGER, primary_key = True, autoincrement = True)
-    url = Column(VARCHER(128),nullable = False)
+    url = Column(VARCHAR(128),nullable = False)
     height = Column(INTEGER(8),nullable = True, default = 0)
     width  = Column(INTEGER(8),nullable = True,default = 0)
     review = Column(TINYINT,nullable = True,default = 1)
-    namespace = Column(VARCHER(32),nullable = False)
+    namespace = Column(VARCHAR(32),nullable = False)
     types = Column(TINYINT,nullable = True,default = 1)
 
     def get_component_id(self):

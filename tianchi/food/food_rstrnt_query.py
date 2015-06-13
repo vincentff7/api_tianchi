@@ -45,7 +45,7 @@ class FoodRstrnt(Base,BaseComponent):
         img_ids = str(self.img_ids)
         img_id_list = img_ids.split(',')
         pic_url_list = []
-        for img_id im img_id_list:
+        for img_id in img_id_list:
             url = {}
             pic_url = get_img_url_by_img_id(img_id)
             url[img_id] = pic_url
