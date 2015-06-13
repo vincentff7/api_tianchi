@@ -37,5 +37,8 @@ class BaseComponent(object):
     def get_component_user_name(self):
         raise Exception('object is NOT available.')
 
+    def get_component_ispepery(self):
+        raise Exception('object is NOT available.')
+
     def to_ui_action(self):
         raise Exception('object is NOT available.')
