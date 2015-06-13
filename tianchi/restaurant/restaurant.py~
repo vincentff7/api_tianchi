@@ -1,0 +1,7 @@
+#-*-coding=utf-8-*-
+
+from tianchi.handler.basehandler import BaseHandler
+
+class RestaurantHandler(BaseHandler):
+    def get(self):
+        print 'get RestaurantHandler'

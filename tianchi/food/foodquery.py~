@@ -1,0 +1,38 @@
+# -*- coding:utf-8 -*-
+
+from sqlalchemy import (
+    Column,
+    INTEGER,
+    VARCHAR,
+    BIGINT,
+    )
+from sqlalchemy.dialects.mysql import TINYINT
+from tianchi.config.db import (
+    Base,
+    dbsession_generator,
+    )
+from tianchi.base.base_component import BaseComponent
+
+class Food(Base,BaseComponent):
+    __tablename__ = 'tc_foods'
+    food_id = Column(INTEGER, primary_key = True, autoincrement = True)
+    food_name = Column(INTEGER, nullable = True,default = '')
+    food_img_id = Column(INTEGER, nullable = True,default = 1)
+    review =  Column(TINYINT, nullable = True,default = 1)
+    types =  Column(INTEGER, nullable = True,default = 1)
+    ispepery =  Column(INTEGER, nullable = True,default = 0)
+
+def get_common_food_property_by_food_id(food_ids):
+    DBSession = dbsession_generator()
+    res = DBSession.query(Food).filter(Food.review == 1).all()
+    DBSession.close()
+    res_dict={}
+    for item in res:
+	item_list = []
+	item_list.append(item.food_name)
+	item_list.append(item.food_img_id)
+	item_list.append(item.ispepery) 
+	res_dict[str(food_id)] = item_list  
+    return res_dict
+
+
