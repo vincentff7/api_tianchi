@@ -12,7 +12,7 @@ from tianchi.config.db import (
     dbsession_generator,
     )
 from tianchi.base.base_component import BaseComponent
- from tianchi.image.imagequery import get_img_url_by_img_id
+from tianchi.image.imagequery import get_img_url_by_img_id
 
 class FoodRstrnt(Base,BaseComponent):
     __tablename__ = 'tc_food_rstrnts'
