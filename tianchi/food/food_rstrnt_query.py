@@ -26,7 +26,8 @@ class FoodRstrnt(Base,BaseComponent):
     food_desc = Column(VARCHER(256))
     ispepery = Column(TINYINT,nullable = False)
     types = Column(TINYINT,nullable = False)
-
+    category _id = Column(INTEGER,nullable = True,default = 1)
+    
     def get_component_food_id(self):
         return str(self.food_id)
 
