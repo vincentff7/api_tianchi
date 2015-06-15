@@ -55,6 +55,15 @@ def get_common_foods_by_food_ids(food_ids):
     DBSession.close()
     return res
 
+def get_common_food_by_food_id(food_id):
+    DBSession = dbsession_generator()
+    res = DBSession.query(Food).filter(
+        Food.food_id == int(food_id)).filter(
+        Food.review == 1).first()
+    DBSession.close()
+    return res
+
+
 if __name__ =='__main__':
     food_ids = [1,2,3,5,6,7,8]
     foods = get_common_foods_by_food_ids(food_ids)

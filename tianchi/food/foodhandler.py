@@ -2,16 +2,23 @@
 
 from tianchi.base.basehandler import BaseHandler
 from tianchi.food.foodquery import get_food_id_list_by_rstrnt_category
-from tianchi.food.foodquery import  get_common_foods_by_food_ids 
+from tianchi.food.foodquery import  (
+    get_common_foods_by_food_ids,
+    get_common_food_by_food_id,
+    )
 #from tianchi.food.categoryquery import get_name_by_category_id
 from tianchi.util.object_build import (
     build_component_common_food_list_item,
     build_component_food_list_item,
+    build_component_common_food_info_item,
+    build_component_food_info_item,
     )
-from tianchi.food.food_rstrnt_query import get_foods_by_food_ids  
-from tianchi.image.imagequery import get_img_url_by_img_id
+from tianchi.food.food_rstrnt_query import (
+    get_foods_by_food_ids,
+    get_food_by_food_id,
+    )
 
-class FoodHandler(BaseHandler):
+class FoodListHandler(BaseHandler):
     def get(self):
         '''
         返回店铺的实物列表
@@ -28,16 +35,32 @@ class FoodHandler(BaseHandler):
         res = []
         data = {}
         for item in base_foods:
-            base_com_= build_component_common_food_list_item(item)
+            base_com= build_component_common_food_list_item(item)
             data[base_com['id']] = base_com
         for item in foods:
             com = build_component_food_list_item(item)
             if com['id'] in data.keys():
-                data[com['id']].update(com['id'])
-                res.append(data[com['id']])
+                data[base_com['id']].update(com['id'])
+                res.append(data[base_com['id']])
             else:
                 pass
         return res
+
+class FoodInfoHander(BaseHandler):
+    def get(self):
+        rstrnt_id = self.get_argument('restaurant_id','')
+        category_id = self.get_argument('category_id','')
+        food_id =  self.get_argument('food_id','')
+        if not str(rstrnt_id).isdigit() or not str(category_id).isdigit() or not str(food_id).isdigit():
+            return '传输数据有误'
+        com = {}
+        base_food = get_common_food_by_food_id(food_id)
+        com_food_info = build_component_common_food_info_item(base_food)
+        food = get_food_by_food_id(food_id,rstrnt_id,category_id)
+        food_info = build_component_food_info_item(food)
+        if com_food_info['food_id'] == food_info['food_id']:
+            com = com_food_info.update(food_info)
+        return com
 
 
 

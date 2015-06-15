@@ -84,6 +84,15 @@ def get_foods_by_food_ids(food_ids):
     DBsession.close()
     return foods
 
+def get_food_by_food_id(food_id,rstrnt_id,category_id):
+    DBsession = dbsession_generator()
+    food = DBsession.query(FoodRstrnt).filter(
+        FoodRstrnt.food_id == int(food_id)).filter(
+        FoodRstrnt.rstrnt_id == int(rstrnt_id)).filter(
+        FoodRstrnt.category_id == int(category_id)).first()
+    DBsession.close()
+    return food 
+
 if __name__ == "__main__":
     ids = get_food_id_list_by_rstrnt_category(1,3)
     print ids
