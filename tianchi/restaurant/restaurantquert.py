@@ -17,7 +17,7 @@ from tianchi.base.base_component import BaseComponent
 from tianchi.image.imagequery import get_img_url_by_img_id
 
 class Restaurant(Base,BaseComponent):
-    __tablename__ = 'tc_food_rstrnts'
+    __tablename__ = 'tc_restaurants'
     rstrnt_id = Column(INTEGER, primary_key = True, autoincrement = True)
     rstrntname = Column(VARCHAR(32),nullable = True,default = "")
     types = Column(TINYINT,nullable = True,default = 1)
@@ -50,9 +50,15 @@ class Restaurant(Base,BaseComponent):
     def get_component_mobile_num(self):
         return self.mobile_num
 
+def get_restaurant_by_rstrnt_id(rstrnt_id):
+    DBsession = dbsession_generator()
+    rstrnt = DBsession.query(Restaurant).filter(Restaurant.rstrnt_id ==rstrnt_id).first()
+    DBsession.close()
+    return rstrnt if rstrnt else None
 
-
-
-
+if __name__ == "__main__":
+    rstrnt = get_restaurant_by_rstrnt_id(1)
+    print rstrnt.rstrntname
+    print rstrnt.address
 
 

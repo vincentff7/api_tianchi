@@ -3,8 +3,9 @@
 from sqlalchemy import (
     Column,
     INTEGER,
-    VARCHER,
+    VARCHAR,
     BIGINT,
+    DECIMAL
     )
 from sqlalchemy.dialects.mysql import TINYINT
 from tianchi.config.db import (
@@ -20,13 +21,13 @@ class FoodRstrnt(Base,BaseComponent):
     food_id = Column(INTEGER,nullable =  False)
     rstrnt_id = Column(INTEGER,nullable = False)
     category_id = Column(INTEGER,nullable = False)
-    original_price = Column(float,nullable = True, default = 0.00)
-    discount = Column(float,nullable = False)
-    img_ids = Column(VARCHER(64),nullable = False)
-    food_desc = Column(VARCHER(256))
+    original_price = Column(DECIMAL(7, 2, asdecimal = False), nullable = False, default = 0)
+    discount = Column(DECIMAL(6, 2, asdecimal = False), nullable = False, default = 1) # 折扣，存的小数，可以直接乘以原价得到折扣价。
+    img_ids = Column(VARCHAR(64),nullable = False)
+    food_desc = Column(VARCHAR(256))
     ispepery = Column(TINYINT,nullable = False)
     types = Column(TINYINT,nullable = False)
-    category _id = Column(INTEGER,nullable = True,default = 1)
+    category_id = Column(INTEGER,nullable = True,default = 1)
     
     def get_component_food_id(self):
         return str(self.food_id)
@@ -57,7 +58,7 @@ class FoodRstrnt(Base,BaseComponent):
         return str(self.original_price)
 
     def get_component_desc(self):
-        return self.description
+        return self.food_desc
 
     def get_component_ispepery(self):
         return self.ispepery
@@ -79,8 +80,14 @@ def get_food_id_list_by_rstrnt_category(rstrnt_id,category_id):
 def get_foods_by_food_ids(food_ids):
     DBsession = dbsession_generator()
     foods = DBsession.query(FoodRstrnt).filter(
-        FoodRstrnt.rstrnt_id.in_(food_ids)).all()
+        FoodRstrnt.food_id.in_(food_ids)).all()
     DBsession.close()
     return foods
 
-
+if __name__ == "__main__":
+    ids = get_food_id_list_by_rstrnt_category(1,3)
+    print ids
+    foods = get_foods_by_food_ids(ids)
+    for food in foods:
+        print food.get_component_desc()
+        print food.get_component_original_price()

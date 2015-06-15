@@ -56,9 +56,10 @@ def get_common_foods_by_food_ids(food_ids):
     return res
 
 if __name__ =='__main__':
-    food_ids = [1,2,3]
+    food_ids = [1,2,3,5,6,7,8]
     foods = get_common_foods_by_food_ids(food_ids)
     if foods:
-        print len(foods)
+        for food in foods:
+            print food.get_component_name()
     else:
         print 'No food'
