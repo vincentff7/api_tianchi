@@ -56,6 +56,9 @@ class FoodRstrnt(Base,BaseComponent):
 
     def get_component_original_price(self):
         return str(self.original_price)
+    
+    def get_component_discount(self):
+        return str(self.discount)
 
     def get_component_desc(self):
         return self.food_desc
@@ -68,11 +71,12 @@ class FoodRstrnt(Base,BaseComponent):
 
 
   
-def get_food_id_list_by_rstrnt_category(rstrnt_id,category_id):
+def get_food_id_list_by_rstrnt_category(rstrnt_id,category_id,offset=0,limit=20):
     DBsession = dbsession_generator()
     res_ids = DBsession.query(FoodRstrnt.id).filter(
         FoodRstrnt.rstrnt_id == int(rstrnt_id)).filter(
-        FoodRstrnt.category_id == int(category_id )).all()
+        FoodRstrnt.category_id == int(category_id )).order_by(
+        FoodRstrnt.food_id).offset(int(offset)).limit(int(limit)).all()
     DBsession.close()
     ids = [id[0] for id in res_ids]
     return ids

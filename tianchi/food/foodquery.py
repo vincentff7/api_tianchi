@@ -33,7 +33,7 @@ class Food(Base,BaseComponent):
     def get_component_pic_url(self):
         url_list = []
         url = {}
-        img_id =str(self.food_img_id())
+        img_id =str(self.food_img_id)
         url[str(img_id)] = get_img_url_by_img_id(img_id)
         url_list.append(url)
         return url_list

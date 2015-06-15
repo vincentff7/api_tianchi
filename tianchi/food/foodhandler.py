@@ -36,12 +36,13 @@ class FoodListHandler(BaseHandler):
         data = {}
         for item in base_foods:
             base_com= build_component_common_food_list_item(item)
-            data[base_com['id']] = base_com
+            print base_com
+            data[base_com['component']['id']] = base_com
         for item in foods:
             com = build_component_food_list_item(item)
-            if com['id'] in data.keys():
-                data[base_com['id']].update(com['id'])
-                res.append(data[base_com['id']])
+            if com['component']['id'] in data.keys():
+                data[com['component']['id']].update(com)
+                res.append(data[com['component']['id']])
             else:
                 pass
         return res

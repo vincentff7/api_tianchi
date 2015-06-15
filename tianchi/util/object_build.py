@@ -7,7 +7,7 @@ def build_component_food_list_item(obj):
         ui['height'] = obj.get_component_height()
         com = {}
         com['componentType'] = 'item'
-        com['id'] = obj.get_component_id()
+        com['id'] = obj.get_component_food_id()
         if  obj.get_component_pic_url():
             com['picUrl'] = obj.get_component_pic_url()
         com['price'] = obj.get_component_price()
@@ -54,7 +54,7 @@ def build_component_food_info_item(obj):
         ui['height'] = obj.get_component_height()
         com = {}
         com['componentType'] = 'item'
-        com['id'] = obj.get_component_id()
+        com['id'] = obj.get_component_food_id()
         if  obj.get_component_pic_url():
             com['picUrl'] = obj.get_component_pic_url()
         com['price'] = obj.get_component_price()
