@@ -17,6 +17,7 @@ from tianchi.food.food_rstrnt_query import (
     get_foods_by_food_ids,
     get_food_by_food_id,
     )
+from tianchi.util.update_dict import new_update_dict
 
 class FoodListHandler(BaseHandler):
     def get(self):
@@ -36,13 +37,13 @@ class FoodListHandler(BaseHandler):
         data = {}
         for item in base_foods:
             base_com= build_component_common_food_list_item(item)
-            print base_com
             data[base_com['component']['id']] = base_com
         for item in foods:
             com = build_component_food_list_item(item)
-            if com['component']['id'] in data.keys():
-                data[com['component']['id']].update(com)
-                res.append(data[com['component']['id']])
+            food_id = com['component']['id']
+            if food_id in data.keys():
+                temp = new_update_dict(data[food_id],com)
+                res.append(temp)
             else:
                 pass
         return res
@@ -60,7 +61,7 @@ class FoodInfoHandler(BaseHandler):
         food = get_food_by_food_id(food_id,rstrnt_id,category_id)
         food_info = build_component_food_info_item(food)
         if com_food_info['food_id'] == food_info['food_id']:
-            com = com_food_info.update(food_info)
+            com = new_update_dict(com_food_info,food_info)
         return com
 
 

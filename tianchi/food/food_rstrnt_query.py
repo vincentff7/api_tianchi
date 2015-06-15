@@ -46,14 +46,17 @@ class FoodRstrnt(Base,BaseComponent):
     def get_component_pic_url(self):
         img_ids = str(self.img_ids)
         img_id_list = img_ids.split(',')
-        pic_url_list = []
-        for img_id in img_id_list:
-            url = {}
-            pic_url = get_img_url_by_img_id(img_id)
-            url[img_id] = pic_url
-            pic_url_list.append(url)
-        return pic_url_list
-
+        if img_id_list:
+            return None
+        else:
+            pic_url_list = []
+            for img_id in img_id_list:
+                url = {}
+                pic_url = get_img_url_by_img_id(img_id)
+                url[img_id] = pic_url
+                pic_url_list.append(url)
+            return pic_url_list
+ 
     def get_component_original_price(self):
         return str(self.original_price)
     
@@ -103,4 +106,4 @@ if __name__ == "__main__":
     foods = get_foods_by_food_ids(ids)
     for food in foods:
         print food.get_component_desc()
-        print food.get_component_original_price()
+        print food.get_component_pic_url()

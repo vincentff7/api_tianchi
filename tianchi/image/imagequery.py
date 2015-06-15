@@ -46,7 +46,7 @@ def get_img_url_by_img_id(img_id):
         Image.image_id == int(img_id)).filter(
         Image.review ==1).first()
     DBsession.close()
-    return url
+    return url[0] if url else ''
 
 if __name__ == "__main__":
     url = get_img_url_by_img_id(2)
