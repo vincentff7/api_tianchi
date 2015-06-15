@@ -15,8 +15,8 @@ from tianchi.user.userhandler import (
     )
 from tianchi.restaurant.restauranthandler import RestaurantHandler
 from tianchi.food.foodhandler import (
-    FoodListHander,
-    FoodInfoHander,
+    FoodListHandler,
+    FoodInfoHandler,
     )
 
 
@@ -26,8 +26,8 @@ def route():
     handlers.append((r'/login',LoginHandler))
     handlers.append((r'/register',RegisterHandler))
     handlers.append((r'/restaurant',RestaurantHandler))
-    handlers.append((r'/foodlist',FoodListHander))
-    handlers.append((r'/foodinfo',FoodInfoHander))
+    handlers.append((r'/foodlist',FoodListHandler))
+    handlers.append((r'/foodinfo',FoodInfoHandler))
     return handlers
 
 def settings():

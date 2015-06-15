@@ -1,7 +1,7 @@
 #-*-coding=utf-8-*- 
 
 from tianchi.base.basehandler import BaseHandler
-from tianchi.food.foodquery import get_food_id_list_by_rstrnt_category
+from tianchi.food.food_rstrnt_query import get_food_id_list_by_rstrnt_category
 from tianchi.food.foodquery import  (
     get_common_foods_by_food_ids,
     get_common_food_by_food_id,
@@ -46,7 +46,7 @@ class FoodListHandler(BaseHandler):
                 pass
         return res
 
-class FoodInfoHander(BaseHandler):
+class FoodInfoHandler(BaseHandler):
     def get(self):
         rstrnt_id = self.get_argument('restaurant_id','')
         category_id = self.get_argument('category_id','')
